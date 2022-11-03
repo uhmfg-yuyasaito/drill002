@@ -45,4 +45,10 @@ $ django-admin startproject uhdrill .
 ### 参考サイト
 ```
 https://qiita.com/ftoshiki/items/1cb250a27bbbbaa5c719
+https://zenn.dev/iroristudio/articles/0216072d2d1f24
+```
+
+### 参考サイト(エラー系)
+```
+https://www.askdjapy.com/vsc-error-message-import-django-db-could-not-be-resolved-from-source/
 ```

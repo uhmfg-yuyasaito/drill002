@@ -6,12 +6,14 @@ services:
     container_name: postgres
     volumes:
       - ./db/dbdata:/var/lib/postgresql/data
-    expose:
-      - '5432'
+    #expose:
+    #  - '5432'
+    ports:
+      - '5432:5432'
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
-      - POSTGRES_DB=myappdb
+      - POSTGRES_DB=postgres
 
   django:
     build: ./django
@@ -21,7 +23,7 @@ services:
       - '8080'
     volumes:
       - ./src:/code
-      - ./django/uwsgi:/etc/uwsgi/
+      - ./django/uwsgi:/etc/uwsgi
     depends_on:
       - db
 
