@@ -107,4 +107,6 @@ venv.bak/
 dmypy.json
 # Pyre type checker
 .pyre/
+#django-environ
+src/secrets/
 # End of https://www.gitignore.io/api/django
