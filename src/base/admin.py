@@ -15,4 +15,4 @@ class ItemAdmin(admin.ModelAdmin):
 admin.site.register(Item, ItemAdmin)
 admin.site.register(Category)
 admin.site.register(Tag)
-#admin.site.unregister(Group)
+admin.site.unregister(Group)
