@@ -6,6 +6,7 @@ services:
     container_name: postgres
     volumes:
       - ./db/dbdata:/var/lib/postgresql/data
+      - ./db/conf:/etc/postgresql/postgresql.conf
     #expose:
     #  - '5432'
     ports:

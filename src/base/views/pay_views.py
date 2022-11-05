@@ -5,6 +5,7 @@ from stripe.api_resources import tax_rate
 from base.models import Item, Order
 import stripe
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib import messages
 from django.core import serializers
 import json
  
@@ -91,10 +92,12 @@ class PayWithStripe(LoginRequiredMixin, View):
     def post(self, request, *args, **kwargs):
         # プロフィールが埋まっているかどうか確認
         if not check_profile_filled(request.user.profile):
+            messages.error(request, '配送に必要な情報がプロフィールに登録されていません。')
             return redirect('/profile/')
  
         cart = request.session.get('cart', None)
         if cart is None or len(cart) == 0:
+            messages.error(request, 'カートが空です。')
             return redirect('/')
  
         items = []  # Orderモデル用に追記

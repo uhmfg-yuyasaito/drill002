@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 import os
 from pathlib import Path
 import environ
+from django.contrib import messages
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -75,6 +76,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                # custom_context_processorsのbase関数のパスを追加
+                'uhdrill.custom_context_processors.base'
             ],
         },
     },
@@ -160,3 +163,16 @@ LOGIN_REDIRECT_URL = '/'
 LOGOUT_URL = '/logout/'
  
 LOGOUT_REDIRECT_URL = '/login/'
+
+# messages
+#bootstrapのクラスを指定することで、視覚的に分かりやすくする
+MESSAGE_TAGS = {
+    messages.ERROR: 'rounded-0 alert alert-danger',
+    messages.WARNING: 'rounded-0 alert alert-warning',
+    messages.SUCCESS: 'rounded-0 alert alert-success',
+    messages.INFO: 'rounded-0 alert alert-info',
+    messages.DEBUG: 'rounded-0 alert alert-secondary',
+}
+
+# custom_context_processors
+TITLE = 'UH-Drill'
