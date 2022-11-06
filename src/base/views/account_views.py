@@ -1,25 +1,43 @@
-from django.views.generic import CreateView, UpdateView
+from django.views.generic import CreateView, UpdateView, TemplateView
 from django.contrib.auth.views import LoginView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import get_user_model
-from base.models import Profile
+from base.models import Profile, UserActivateTokens
 from base.forms import UserCreationForm
 from django.contrib import messages
+from django.http import HttpResponse
  
  
 class SignUpView(CreateView):
     form_class = UserCreationForm
     success_url = '/login/'
-    template_name = 'pages/login_signup.html'
+    template_name = 'pages/signup.html'
     
     #フォームが有効の場合の処理
     def form_valid(self, form):
-        messages.success(self.request, '新規登録が完了しました。続けてログインしてください。')
+        messages.success(self.request, '入力したメールアドレスにメールを送信しました。')
         return super().form_valid(form)
+
+
+# token認証とユーザーアクティベーション
+class AccountActivateView(TemplateView):
+    template_name = 'pages/activate.html'
  
+    def get_context_data(self, activate_token,**kwargs):
+        context = super().get_context_data(**kwargs)
+        activated_user = UserActivateTokens.objects.activate_user_by_token(
+        activate_token)
+        if hasattr(activated_user, 'is_active'):
+            if activated_user.is_active:
+                context["message"] ='ユーザーのアクティベーションが完了しました'
+            if not activated_user.is_active:
+                context["message"] = 'アクティベーションが失敗しています。管理者に問い合わせてください'
+        if not hasattr(activated_user, 'is_active'):
+            context["message"] = 'エラーが発生しました'
+        return context
  
 class Login(LoginView):
-    template_name = 'pages/login_signup.html'
+    template_name = 'pages/login.html'
  
     #フォームが有効の場合の処理
     def form_valid(self, form):

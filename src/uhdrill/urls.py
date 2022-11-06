@@ -27,6 +27,8 @@ urlpatterns = [
     path('signup/', views.SignUpView.as_view()),
     path('account/', views.AccountUpdateView.as_view()),
     path('profile/', views.ProfileUpdateView.as_view()),
+    # path('users/<str:activate_token>/activation/', views.activate_user, name='users-activation'),
+    path('activate/<str:activate_token>/', views.AccountActivateView.as_view()),
  
     # Order
     path('orders/<str:pk>/', views.OrderDetailView.as_view()),

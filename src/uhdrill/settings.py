@@ -50,6 +50,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'base',
+    # Signal発火用
+    'uhdrill.apps.UhdrillConfig'
 
 ]
 
@@ -176,3 +178,15 @@ MESSAGE_TAGS = {
 
 # custom_context_processors
 TITLE = 'UH-Drill'
+
+# email
+EMAIL_BACKEND = env.str('EMAIL_BACKEND')
+EMAIL_HOST = env.str('EMAIL_HOST')
+EMAIL_PORT = env.int('EMAIL_PORT')
+DEFAULT_FROM_EMAIL = env.str('DEFAULT_FROM_EMAIL')
+EMAIL_HOST_USER = env.str('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = env.str('EMAIL_HOST_PASSWORD')
+EMAIL_USE_TLS = env.bool('EMAIL_USE_TLS')
+
+# トークン有効期限
+ACTIVATION_EXPIRED_DAYS = 3

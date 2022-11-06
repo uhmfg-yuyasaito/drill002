@@ -19,6 +19,7 @@ class Order(models.Model):
     items = models.JSONField()
     shipping = models.JSONField()
     shipped_at = models.DateTimeField(blank=True, null=True)
+    arrived_at = models.DateTimeField(blank=True, null=True)
     canceled_at = models.DateTimeField(blank=True, null=True)
     memo = models.TextField(blank=True)
     created_at = models.DateTimeField(auto_now_add=True)

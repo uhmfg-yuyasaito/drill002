@@ -75,6 +75,11 @@
           <button class="btn btn-secondary" disabled>未発送</button>
         </div>
         {% endif %}
+        {% if object.arrived_at %}
+        <div class="my-3 ">
+          <button class="btn btn-primary" disabled>到着済み: {{object.arrived_at}}</button>
+        </div>
+        {% endif %}
         {% if object.canceled_at %}
         <div class="my-3 ">
           <button class="btn btn-danger" disabled>キャンセル済み: {{object.canceled_at}}</button>

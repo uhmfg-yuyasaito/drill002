@@ -17,7 +17,7 @@
           {% for object in object_list %}
           <tr>
             <td><a href="/orders/{{object.pk}}/">{{object.pk}}</a></td>
-            <td>{{object.created_at|date:"Y-m-d f"}}</td>
+            <td>{{object.created_at|date:"Y-m-d H:i"}}</td>
             <td>¥{{object.tax_included}}</td>
           </tr>
           {% endfor %}

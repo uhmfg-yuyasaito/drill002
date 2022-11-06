@@ -3,12 +3,11 @@ from django.views.generic import View, TemplateView
 from django.conf import settings
 from stripe.api_resources import tax_rate
 from base.models import Item, Order
-import stripe
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
 from django.core import serializers
 import json
- 
+import stripe
  
 stripe.api_key = settings.STRIPE_API_SECRET_KEY
  
@@ -17,6 +16,7 @@ class PaySuccessView(LoginRequiredMixin, TemplateView):
     template_name = 'pages/success.html'
  
     def get(self, request, *args, **kwargs):
+
         # 最新のOrderオブジェクトを取得し、注文確定に変更
         order = Order.objects.filter(
             user=request.user).order_by('-created_at')[0]
